@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>落ちていく</title>
+<meta name="description" content="超高層ビル街の中を、どこまでも落ち続けるVR体験。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="title">
+  <div class="card">
+    <h1>落ちていく</h1>
+    <p class="lead">超高層ビル街の上空から、どこまでも落ちていく。<br>地面には、いつまでも着きません。</p>
+
+    <button id="btn-start" disabled>落下開始</button>
+    <p id="xr-status" class="status">WebXR を確認中…</p>
+
+    <fieldset class="opts">
+      <legend>快適性の設定</legend>
+      <div class="row">
+        <span class="label">落下速度</span>
+        <label><input type="radio" name="speed" value="0"> ゆっくり</label>
+        <label><input type="radio" name="speed" value="1"> ふつう</label>
+        <label><input type="radio" name="speed" value="2"> はやい</label>
+      </div>
+      <div class="row">
+        <span class="label">視野制限</span>
+        <label><input type="checkbox" id="opt-vignette"> 周辺を暗くする（酔いにくくなります）</label>
+      </div>
+    </fieldset>
+
+    <button id="btn-preview" class="sub">PCプレビューで見る</button>
+
+    <ul class="howto">
+      <li><b>Quest 3：</b>トリガーで一時停止／再開、A・Xで速度、B・Yで視野制限、グリップ長押しで終了。</li>
+      <li><b>PC：</b>ドラッグで見回す。Space 一時停止、1/2/3 速度、V 視野制限、Esc 戻る。</li>
+      <li>座ったまま体験してください。気分が悪くなったらすぐに一時停止するか、ヘッドセットを外してください。VR酔いには個人差があります。</li>
+    </ul>
+  </div>
+</div>
+
+<div id="pc-hud" hidden>
+  <button id="pc-pause"></button>
+  <button id="pc-speed"></button>
+  <button id="pc-vig"></button>
+  <button id="pc-back">タイトルへ (Esc)</button>
+</div>
+<div id="pc-toast"></div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
