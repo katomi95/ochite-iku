@@ -4,8 +4,8 @@
 // 急な加速・急な停止が起きない。落下距離は倍精度で積算し、上限は設けない（地面は存在しない）。
 export const SPEEDS = [
   { name: 'ゆっくり', v: 7 },
-  { name: 'ふつう', v: 15 },
-  { name: 'はやい', v: 30 },
+  { name: 'ふつう', v: 30 },
+  { name: 'はやい', v: 60 },
 ];
 export const WAIT_SECONDS = 4; // 開始から落ち始めるまでの静止時間
 
@@ -26,12 +26,12 @@ export class Fall {
 
   get waiting() { return this.t < WAIT_SECONDS; }
   get target() { return this.paused || this.waiting ? 0 : SPEEDS[this.level].v; }
-  get speedFrac() { return Math.min(this.v / SPEEDS[2].v, 1); }
+  get speedFrac() { return Math.min(this.v / 30, 1); } // ビネット等の強さ（30m/s 以上は最大）
 
   update(dt) {
     this.t += dt;
-    // 加速は約9秒かけて目標速度へ（どの速度設定でも同じ時間）、減速は最大 6m/s²
-    const up = SPEEDS[this.level].v / 9, down = 6;
+    // 加速は約9秒かけて目標速度へ（ただし最大 5m/s²。はやいは約12秒）、減速は最大 8m/s²
+    const up = Math.min(SPEEDS[this.level].v / 9, 5), down = 8;
     const w = 1.3;
     const steps = Math.ceil(dt / 0.02);
     const h = dt / steps;

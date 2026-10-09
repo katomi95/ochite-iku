@@ -61,7 +61,7 @@ export class Streaks {
   // speed: 現在の落下速度[m/s]
   update(fall, speed) {
     this.mat.uniforms.uScroll.value = fall % P_RANGE;
-    this.mat.uniforms.uLen.value = Math.min(0.05 + speed * 0.07, 2.6);
+    this.mat.uniforms.uLen.value = Math.min(0.05 + speed * 0.07, 4.0);
     this.mat.uniforms.uAlpha.value = 0.12 + Math.min(speed / 30, 1) * 0.38;
   }
 }

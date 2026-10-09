@@ -72,8 +72,9 @@ export class Wind {
   update(speed, dt, volume = 1) {
     if (!this.ctx) return;
     const t = this.ctx.currentTime;
-    const s = Math.min(speed / 30, 1.15);
-    const loud = Math.pow(Math.min(s, 1), 0.75);
+    // 30m/s までで大きさはほぼ頭打ち。それ以上は少しだけ大きく・高くする（長時間でも疲れない範囲）
+    const s = Math.min(speed / 30, 1.6);
+    const loud = Math.pow(Math.min(s, 1), 0.75) * (1 + 0.15 * Math.max(s - 1, 0));
     // ゆるやかな突風（ランダムウォーク）
     this.gustV += (Math.random() - 0.5) * dt * 0.8 - this.gustV * dt * 0.6;
     this.gust = Math.max(-1, Math.min(1, this.gust + this.gustV * dt * 2));
